@@ -1,8 +1,15 @@
 import React from "react";
-import AddTodo from "./components/AddTodo";
+import AddTodo from "./components/pages/AddTodo";
+import ListTodos from "./components/pages/ListTodos";
+
 
 const App = () => {
-  return <AddTodo />;
+  return (
+    <div>
+      <AddTodo />
+      <ListTodos />
+    </div>
+  );
 };
 
 export default App;

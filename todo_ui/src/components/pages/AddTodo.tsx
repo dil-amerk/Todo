@@ -3,6 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
+import axios from "axios";
+import { IconButton } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const AddTodo = () => {
   const [name, setName] = useState("");
@@ -10,19 +13,16 @@ const AddTodo = () => {
 
   const handleOnSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    try {
-      const body = { name, description };
-      const response = await fetch("http://localhost:5000/todos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      setName("");
-      setDescription("");
-      <Alert severity="success">Todo was added :D </Alert>;
-    } catch (error: any) {
-      console.log(error.message);
-    }
+    const body = { name, description };
+    await axios
+      .post("http://localhost:5000/todos", {
+        name: body.name,
+        description: body.description,
+      })
+      .then((res) => console.log(res))
+      .then((err) => console.error());
+    setName("");
+    setDescription("");
   };
 
   return (
@@ -41,14 +41,14 @@ const AddTodo = () => {
           id="outlined-multiline-static"
           label="Description of the todo"
           multiline
-          rows={4}
+          rows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <Button size="medium" type="submit">
-          ADD
-        </Button>
+        <IconButton color="primary" aria-label="add" type="submit">
+          <AddCircleIcon />
+        </IconButton>
       </div>
     </Box>
   );
