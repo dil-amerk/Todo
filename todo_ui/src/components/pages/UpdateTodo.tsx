@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { TextField, IconButton } from "@mui/material";
+import { TextField, IconButton, Grid, Divider } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import axios from "axios";
 
@@ -17,9 +17,10 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  mx: 'auto',
 };
 
-const UpdateTodo = ({todo_name, todo_description, todo_id}) => {
+const UpdateTodo = ({ todo_name, todo_description, todo_id }) => {
   const [name, setName] = useState(todo_name);
   const [description, setDescription] = useState(todo_description);
   const [open, setOpen] = useState(false);
@@ -40,7 +41,7 @@ const UpdateTodo = ({todo_name, todo_description, todo_id}) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Edit</Button>
+      <Button onClick={handleOpen} sx={{border: 1, backgroundColor: 'Highlight', color: 'black'}}>Edit</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -48,35 +49,42 @@ const UpdateTodo = ({todo_name, todo_description, todo_id}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h3" component="h1">
             Edit Todo:
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 4 }}>
-            <Box component="form" onSubmit={handleOnSubmit}>
-              <div>
-                <TextField
-                  id="outlined-multiline-flexible"
-                  label={name}
-                  multiline
-                  maxRows={2}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+            <Grid component="form" onSubmit={handleOnSubmit} sx={{mx: 15}}>
+              <TextField
+                id="outlined-multiline-flexible"
+                margin="dense"
+                label={name}
+                multiline
+                maxRows={2}
+                variant="filled"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
 
-                <TextField
-                  id="outlined-multiline-static"
-                  label={description}
-                  multiline
-                  rows={3}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
+              <TextField
+                id="outlined-multiline-flexible"
+                margin="dense"
+                label={description}
+                multiline
+                rows={3}
+                variant="filled"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
 
-                <IconButton color="primary" aria-label="add" type="submit">
-                  <AddCircleIcon />
-                </IconButton>
-              </div>
-            </Box>
+              <IconButton
+                color="success"
+                aria-label="add"
+                type="submit"
+                edge="end"
+              >
+                <AddCircleIcon />
+              </IconButton>
+            </Grid>
           </Typography>
         </Box>
       </Modal>

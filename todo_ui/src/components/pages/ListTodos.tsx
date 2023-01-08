@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Divider, Paper, ToggleButton } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import UpdateTodo from "./UpdateTodo";
 
 const ListTodos = () => {
@@ -28,37 +38,61 @@ const ListTodos = () => {
   if (!todos) {
     return null;
   }
-  console.log(todos);
+  // console.log(todos);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexWrap: "wrap-reverse",
-        "& > :not(style)": {
-          m: 1,
-          width: "auto",
-          height: "auto",
-        },
-      }}
-    >
-      {todos.map((todo: any) => (
-        <Paper elevation={8} key={todo.id}>
-          {todo.todo_name}
-          <Divider color="black" />
-          {todo.todo_description}
-          <Divider color="black" />
-          <Box>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            <UpdateTodo
-              todo_name={todo.todo_name}
-              todo_description={todo.todo_description}
-              todo_id={todo.id}
-            />
-          </Box>
-        </Paper>
-      ))}
-    </Box>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: "auto", border: 2 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontStyle: "italic" }}>Todo</TableCell>
+            <TableCell align="center" sx={{ fontStyle: "italic" }}>
+              Description
+            </TableCell>
+            <TableCell align="center" sx={{ fontStyle: "italic" }}>
+              Edit
+            </TableCell>
+            <TableCell align="center" sx={{ fontStyle: "italic" }}>
+              Delete
+            </TableCell>
+            <TableCell align="center" sx={{ fontStyle: "italic" }}>
+              Done
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {todos.map((todo: any) => (
+            <TableRow
+              key={todo.todo_name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {todo.todo_name}
+              </TableCell>
+              <TableCell align="center">{todo.todo_description}</TableCell>
+              <TableCell align="center">
+                <UpdateTodo
+                  todo_name={todo.todo_name}
+                  todo_description={todo.todo_description}
+                  todo_id={todo.id}
+                />
+              </TableCell>
+              <TableCell align="center">
+                <Button
+                  onClick={() => deleteTodo(todo.id)}
+                  sx={{ border: 1, backgroundColor: "red", color: "black" }}
+                >
+                  Delete
+                </Button>
+              </TableCell>
+              <TableCell align="center">
+                <Checkbox />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

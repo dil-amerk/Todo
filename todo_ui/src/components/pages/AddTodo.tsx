@@ -1,10 +1,8 @@
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import axios from "axios";
-import { IconButton } from "@mui/material";
+import { IconButton, Input, Paper } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const AddTodo = () => {
@@ -26,30 +24,28 @@ const AddTodo = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleOnSubmit}>
-      <div>
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Todo Name"
-          multiline
-          maxRows={2}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+    <Box sx={{ width: 300, mx: "auto", mb: 10 }}>
+      <Box component="form" onSubmit={handleOnSubmit}>
+        <Box sx={{ display: "inline-flex" }}>
+          <TextField
+            sx={{ justifyContent: "center" }}
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-        <TextField
-          id="outlined-multiline-static"
-          label="Description of the todo"
-          multiline
-          rows={3}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+          <TextField
+            sx={{ justifyContent: "center" }}
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
-        <IconButton color="primary" aria-label="add" type="submit">
-          <AddCircleIcon />
-        </IconButton>
-      </div>
+          <IconButton color="success" aria-label="add" type="submit">
+            <AddCircleIcon />
+          </IconButton>
+        </Box>
+      </Box>
     </Box>
   );
 };
