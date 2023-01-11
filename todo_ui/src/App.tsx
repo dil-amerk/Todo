@@ -1,15 +1,18 @@
-import React from "react";
-import AddTodo from "./components/pages/AddTodo";
-import ListTodos from "./components/pages/ListTodos";
-
+import React, { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store} from './redux/store';
 
 
 const App = () => {
+  // const dispatch = useAppDispatch()
+  // useEffect(() => {
+  //   dispatch(getTodos())
+  // }, [])
+
   return (
-    <div>
-      <AddTodo />
-      <ListTodos />
-    </div>
+    <Provider store={store}>
+     
+    </Provider>
   );
 };
 

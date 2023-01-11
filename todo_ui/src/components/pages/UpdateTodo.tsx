@@ -20,7 +20,7 @@ const style = {
   mx: 'auto',
 };
 
-const UpdateTodo = ({ todo_name, todo_description, todo_id }) => {
+const UpdateTodo = ({ todo_name, todo_description, todo_id }): JSX.Element => {
   const [name, setName] = useState(todo_name);
   const [description, setDescription] = useState(todo_description);
   const [open, setOpen] = useState(false);
